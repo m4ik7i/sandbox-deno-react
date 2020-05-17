@@ -1,11 +1,17 @@
-import { Application } from 'https://deno.land/x/abc/mod.ts';
-import { cors } from 'https://deno.land/x/abc/middleware/cors.ts';
+import { Application, send } from 'https://deno.land/x/oak/mod.ts';
 
 const BUILD_DIR = 'build';
 const PORT = 5000;
 
 const app = new Application();
 
-app.static('/', `./${BUILD_DIR}`, cors()).start({ port: PORT });
+app.use(async (ctx) => {
+  await send(ctx, ctx.request.url.pathname, {
+    root: `${Deno.cwd()}/${BUILD_DIR}`,
+    index: 'index.html',
+  });
+});
 
 console.log(`server listening on http://localhost:${PORT}`);
+
+await app.listen({ port: PORT });
