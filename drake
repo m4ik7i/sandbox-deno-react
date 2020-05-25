@@ -1,1 +1,1 @@
-deno run -A DrakeFile.js $@
+deno run -A DrakeFile.ts $@
