@@ -1,4 +1,6 @@
 import { React, ReactDOM } from './deps.js';
 import { HelloWorld } from './mod.js';
 
-ReactDOM.render(<HelloWorld />, document.getElementById('root'));
+const root = document.getElementById('root');
+
+ReactDOM.render(React.createElement(HelloWorld), root);
